@@ -3,7 +3,7 @@
 Plugin Name: Fuse Social Floating Sidebar
 Plugin URI: https://www.fusefloat.com/
 Description: This Fuse Social Floating Sidebar plugin allow you to put social icons which can be link with your social media profiles.
-Version: 5.4.11
+Version: 5.4.12
 Author: Daniyal Ahmed
 Author URI: https://www.fusefloat.com/
 License: GNU General Public License v3.0
@@ -16,7 +16,7 @@ of their respective owners, and do not, necessarily, inherit the GPLv2 license.
  * Defining Version Number
  * 
  * */
-define('FUSE_VERSION', '5.4.11');
+define('FUSE_VERSION', '5.4.12');
 define('FUSE_URL', dirname( __FILE__ ));
 
 /**

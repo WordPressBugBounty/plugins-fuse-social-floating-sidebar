@@ -2,8 +2,8 @@
 Contributors: daniyalahmedk, freemius
 Tags: social media, floating sidebar, social widget, social icons, animated social icons
 Requires at least: 3.0
-Tested up to: 6.6.1
-Stable tag: 5.4.11
+Tested up to: 6.7.1
+Stable tag: 5.4.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -54,14 +54,14 @@ Fuse Pro allow you to add custom icons, and give you more control on the social 
 </ul>
 [Get Pro Version Now](https://www.fusefloat.com "Fuse Social Floating")
 
-<u>Use coupon code SALE50OFF to get 50% discount.</u>
+<u>Use coupon code WPORG20 to get 20% discount.</u>
 <br />
 [youtube https://www.youtube.com/watch?v=fBC0SL5Ieig]
 It's simple, unique, and the best WordPress plugin for floating social icons.
 Fuse Social Floating Sidebar allows you to add the following social icons to your website  <br />
 * Facebook
 * Threads (New)
-* Twitter
+* X (New)
 * RSS
 * YouTube
 * LinkedIn

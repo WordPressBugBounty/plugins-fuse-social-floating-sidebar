@@ -270,8 +270,8 @@ if(!empty($options['size'])){
 
 			{
 
-			background:#00aced;
-			border-color: #00aced;
+			background:#000;
+			border-color: #000;
 			<?php if($desiflag) { echo 'color: #00aced !important;'; } ?>
 
 			}
