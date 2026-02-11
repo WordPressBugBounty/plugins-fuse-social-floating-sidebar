@@ -2,7 +2,7 @@
 Contributors: daniyalahmedk, freemius
 Tags: social media, floating sidebar, social widget, social icons, animated social icons
 Requires at least: 3.0
-Tested up to: 6.7.1
+Tested up to: 6.8.2
 Stable tag: 5.4.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
