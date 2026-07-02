@@ -104,8 +104,11 @@ class Making_Fuse_Icons
     
     function fuse_redux_generate_HTML( $options )
     {
-        global  $post ;
-        $pageid = $post->ID;
+        global  $post;
+        $pageid = 0;
+        if(!empty($post)){
+            $pageid = $post->ID;
+        }
         echo  "<div id='icon_wrapper'>" ;
         $fuse_settings = $options;
         $display_flag = 1;
