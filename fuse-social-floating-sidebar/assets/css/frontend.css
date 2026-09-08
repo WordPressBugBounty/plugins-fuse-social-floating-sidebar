@@ -1,0 +1,205 @@
+/* Fuse Social Icons — front-end */
+
+.fsi-wrap, .fsi-share { display: flex; gap: 8px; }
+.fsi-wrap { flex-direction: column; gap: var(--fsi-gap, 8px); }
+.fsi-share { flex-direction: row; flex-wrap: wrap; align-items: center; }
+
+/* ---- floating bar ---- */
+.fsi-floating { position: fixed; z-index: 99990; transition: opacity .25s ease, transform .25s ease; }
+.fsi-floating.fsi-pos-left  { left: 0; }
+.fsi-floating.fsi-pos-right { right: 0; }
+.fsi-floating.fsi-valign-middle { top: 50%; transform: translateY(-50%); }
+.fsi-floating.fsi-valign-top    { top: 90px; }
+.fsi-floating.fsi-valign-bottom { bottom: 40px; }
+.fsi-floating.fsi-valign-custom { top: var(--fsi-vpos, 25%); }
+
+/* bottom = horizontal centered bar */
+.fsi-floating.fsi-pos-bottom {
+	left: 50%; bottom: 0; top: auto;
+	transform: translateX(-50%);
+	flex-direction: row;
+	padding: 8px 12px;
+	background: rgba(255,255,255,.9);
+	backdrop-filter: blur(6px);
+	border-radius: 16px 16px 0 0;
+	box-shadow: 0 -4px 20px rgba(0,0,0,.12);
+}
+
+.fsi-floating.fsi-scroll-hidden { opacity: 0; pointer-events: none; }
+.fsi-floating.fsi-pos-left.fsi-scroll-hidden  { transform: translateY(-50%) translateX(-24px); }
+.fsi-floating.fsi-pos-right.fsi-scroll-hidden { transform: translateY(-50%) translateX(24px); }
+.fsi-floating.fsi-pos-bottom.fsi-scroll-hidden { transform: translateX(-50%) translateY(24px); }
+
+@media (max-width: 768px) {
+	.fsi-hide-mobile.fsi-floating { display: none !important; }
+}
+
+/* ---- icons ---- */
+.fsi-icon {
+	width: var(--fsi-size, 34px);
+	height: var(--fsi-size, 34px);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--fsi-force-bg, var(--fsi-bg, #666));
+	color: var(--fsi-force-fg, var(--fsi-fg, #fff));
+	/* !important: themes commonly style content-area links with underlines at
+	   higher specificity (e.g. ".entry-content a") than a single plugin class. */
+	text-decoration: none !important;
+	line-height: 1;
+	flex-shrink: 0;
+	transition: transform .16s ease, background .16s ease, color .16s ease, box-shadow .16s ease;
+}
+.fsi-icon svg { width: 50%; height: 50%; }
+.fsi-icon img { display: block; }
+/* share buttons: icon glyph size is independent of the button/container size
+   (see --fsi-icon-size on the anchor) so it doesn't shrink proportionally
+   relative to the button as the button grows. */
+.fsi-icon.fsi-share-icon svg { width: var(--fsi-icon-size, 50%); height: var(--fsi-icon-size, 50%); }
+
+.fsi-shape-round   .fsi-icon { border-radius: 50%; }
+.fsi-shape-rounded .fsi-icon { border-radius: 28%; }
+.fsi-shape-square  .fsi-icon { border-radius: 0; }
+.fsi-shape-custom  .fsi-icon { border-radius: var(--fsi-radius, 0); }
+
+/* Legacy premium "Design 3": transparent fill, solid colored border, colored
+   icon instead of a filled swatch — matches the old plugin's design-section=3. */
+.fsi-shape-outline .fsi-icon {
+	background: transparent;
+	border: 2px solid var(--fsi-force-bg, var(--fsi-bg, currentColor));
+	color: var(--fsi-force-bg, var(--fsi-bg, currentColor));
+	border-radius: 50%;
+}
+
+.fsi-shadow .fsi-icon { box-shadow: 0 3px 8px rgba(0,0,0,.22); }
+
+.fsi-icon:hover, .fsi-icon:focus-visible {
+	background: var(--fsi-force-bg, var(--fsi-hbg, var(--fsi-bg, #666)));
+	color: var(--fsi-force-fg, var(--fsi-hfg, var(--fsi-fg, #fff)));
+}
+.fsi-icon:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+
+/* hover effects */
+.fsi-hover-lift   .fsi-icon:hover { transform: translateY(-4px); }
+.fsi-hover-pulse  .fsi-icon:hover { transform: scale(1.18); }
+.fsi-hover-rotate .fsi-icon:hover { transform: rotate(360deg); transition-duration: .5s; }
+.fsi-hover-flip   .fsi-icon:hover { transform: rotateY(360deg); transition-duration: .6s; }
+.fsi-hover-shake  .fsi-icon:hover { animation: fsiShake .4s ease; }
+.fsi-hover-bounce .fsi-icon:hover { animation: fsiBounce .5s ease; }
+.fsi-hover-swing  .fsi-icon:hover { animation: fsiSwing .6s ease; transform-origin: top center; }
+@keyframes fsiShake {
+	0%,100% { transform: translateX(0); }
+	25% { transform: translateX(-3px); }
+	75% { transform: translateX(3px); }
+}
+@keyframes fsiBounce {
+	0%,100% { transform: translateY(0); }
+	30% { transform: translateY(-7px); }
+	60% { transform: translateY(0); }
+	80% { transform: translateY(-3px); }
+}
+@keyframes fsiSwing {
+	20% { transform: rotate(12deg); }
+	40% { transform: rotate(-9deg); }
+	60% { transform: rotate(5deg); }
+	80% { transform: rotate(-4deg); }
+	100% { transform: rotate(0); }
+}
+
+/* reveal-on-click */
+.fsi-reveal-btn {
+	width: var(--fsi-size, 34px); height: var(--fsi-size, 34px);
+	border-radius: 50%; cursor: pointer; padding: 0;
+	border: 2px solid var(--fsi-action-border, transparent);
+	background: var(--fsi-action-bg, #111214); color: #fff;
+	display: flex; align-items: center; justify-content: center;
+}
+.fsi-reveal-btn svg { width: 45%; height: 45%; }
+.fsi-reveal-items {
+	display: flex; flex-direction: column; gap: 8px;
+	padding: var(--fsi-rv-pad, 0);
+	max-height: 0; overflow: hidden; opacity: 0;
+	transition: max-height .28s ease, opacity .2s ease;
+}
+.fsi-pos-bottom .fsi-reveal-items { flex-direction: row; }
+.fsi-reveal-items.is-open { max-height: 1200px; opacity: 1; }
+.fsi-rv-shadow .fsi-icon { box-shadow: 0 3px 8px rgba(0,0,0,.25); }
+
+/* action-button "animate on hover": a lift + scale on the revealed icons
+   (legacy active_animate_hover shifted icons on hover; we match the spirit
+   — a hover animation on revealed icons, independent of the general hover
+   effect — with the plugin's own lift/scale vocabulary rather than the
+   exact old transform). .fsi-icon already carries the transform transition. */
+.fsi-rv-animate-hover .fsi-icon:hover { transform: translateY(-3px) scale(1.08); }
+
+/* reveal on mobile only: desktop shows icons directly, no button */
+@media (min-width: 769px) {
+	.fsi-reveal-mobile .fsi-reveal-btn { display: none; }
+	.fsi-reveal-mobile .fsi-reveal-items { max-height: none; opacity: 1; overflow: visible; }
+}
+
+/* sticky mobile bar: floating bar becomes a full-width bottom row on mobile */
+@media (max-width: 768px) {
+	.fsi-floating.fsi-sticky-bar {
+		left: 0 !important; right: 0 !important; bottom: 0 !important; top: auto !important;
+		transform: none !important;
+		flex-direction: row; width: 100%;
+		background: #fff; box-shadow: 0 -3px 14px rgba(0,0,0,.14);
+		padding: 8px; gap: 6px; border-radius: 0;
+	}
+	.fsi-floating.fsi-sticky-bar .fsi-icon { flex: 1; width: auto; }
+	.fsi-floating.fsi-sticky-bar .fsi-reveal-items { flex-direction: row; flex: 1; }
+}
+
+/* ---- share buttons ---- */
+.fsi-share-ic { display: inline-flex; align-items: center; justify-content: center; }
+.fsi-style-label .fsi-share-icon { width: auto; padding: 0 14px; border-radius: 999px; gap: 8px; }
+.fsi-style-label.fsi-shape-square .fsi-share-icon { border-radius: 6px; }
+.fsi-share-label { font-size: 13px; font-weight: 500; }
+.fsi-share-count { font-size: 12px; font-weight: 600; opacity: .85; margin-left: 4px; }
+.fsi-copy-link.fsi-copied::after { content: "\2713"; margin-left: 4px; }
+
+/* "button" style: rectangular full-color bars with a darker icon segment */
+.fsi-style-button .fsi-share-icon {
+	width: auto;
+	min-width: 150px;
+	border-radius: 4px !important;
+	gap: 10px;
+	padding: 0 14px 0 0;
+	justify-content: flex-start;
+	overflow: hidden;
+}
+.fsi-style-button .fsi-share-ic {
+	width: var(--fsi-size, 34px);
+	height: var(--fsi-size, 34px);
+	background: rgba(0, 0, 0, .15);
+	flex-shrink: 0;
+}
+.fsi-style-button .fsi-share-label { font-weight: 600; }
+
+/* share sidebar (desktop floating) */
+.fsi-share-sidebar { position: fixed; left: 0; top: 50%; transform: translateY(-50%); z-index: 99989; }
+.fsi-share-sidebar .fsi-share { flex-direction: column; }
+@media (max-width: 900px) { .fsi-share-sidebar { display: none; } }
+
+/* sticky mobile share bar */
+.fsi-sticky-mobile { display: none; }
+@media (max-width: 768px) {
+	.fsi-sticky-mobile {
+		display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 99989;
+		background: #fff; box-shadow: 0 -3px 14px rgba(0,0,0,.12); padding: 8px 10px;
+	}
+	.fsi-sticky-mobile .fsi-share { justify-content: space-around; }
+}
+
+/* ---- chat bubble ---- */
+.fsi-chat-bubble {
+	position: fixed; right: 22px; bottom: 22px; z-index: 99991;
+	width: 54px; height: 54px; border-radius: 50%;
+	background: var(--fsi-bg, #25D366); color: #fff;
+	display: flex; align-items: center; justify-content: center;
+	box-shadow: 0 6px 20px rgba(0,0,0,.28);
+	transition: transform .18s ease;
+}
+.fsi-chat-bubble:hover { transform: scale(1.08); }
+.fsi-chat-bubble svg { width: 26px; height: 26px; }

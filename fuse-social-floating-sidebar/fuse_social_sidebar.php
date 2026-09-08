@@ -1,112 +1,67 @@
 <?php
-/*
-Plugin Name: Fuse Social Floating Sidebar
-Plugin URI: https://www.fusefloat.com/
-Description: This Fuse Social Floating Sidebar plugin allow you to put social icons which can be link with your social media profiles.
-Version: 5.4.13
-Author: Daniyal Ahmed
-Author URI: https://www.fusefloat.com/
-License: GNU General Public License v3.0
-License URI: http://www.opensource.org/licenses/gpl-license.php
-NOTE: This plugin is released under the GPLv2 license. The icons used in this plugin are the property
-of their respective owners, and do not, necessarily, inherit the GPLv2 license.
-*/
 /**
- * 
- * Defining Version Number
- * 
- * */
-define('FUSE_VERSION', '5.4.13');
-define('FUSE_URL', dirname( __FILE__ ));
+ * Plugin Name: Fuse Social Icons
+ * Plugin URI: https://www.fusefloat.com/
+ * Description: Floating social sidebar, social share buttons, widget, and Gutenberg block — all in one plugin. Rebuilt from the ground up, with a one-click migrator from your existing settings.
+ * Version: 6.0.0
+ * Author: Daniyal Ahmed
+ * Author URI: https://www.fusefloat.com/
+ * License: GPLv2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: fuse-social-floating-sidebar
+ * Requires PHP: 7.4
+ */
 
-/**
- * 
- * Including Redux
- * 
- * */ 
-require_once 'inc/extensions/loader.php';
-if ( !class_exists( 'ReduxFramework' ) && file_exists( dirname( __FILE__ ) . '/framework/redux-framework.php' ) ) {
-    require_once dirname( __FILE__ ) . '/framework/redux-framework.php';
-}
-// Create a helper function for easy SDK access.
-
-if ( !function_exists( 'fs_fs' ) ) {
-    // Create a helper function for easy SDK access.
-    function fs_fs()
-    {
-        global  $fs_fs ;
-        
-        if ( !isset( $fs_fs ) ) {
-            // Include Freemius SDK.
-            require_once dirname( __FILE__ ) . '/freemius/start.php';
-            $fs_fs = fs_dynamic_init( array(
-                'id'             => '2701',
-                'slug'           => 'fuse-social-floating-sidebar',
-                'type'           => 'plugin',
-                'public_key'     => 'pk_70ed0c631ac1720148be7f62dca7e',
-                'is_premium'     => false,
-                'premium_suffix' => 'FUSE PRO',
-                'has_addons'     => false,
-                'has_paid_plans' => true,
-                'menu'           => array(
-                'slug'    => 'FUSESoicalFloatingSidebar',
-                'support' => false,
-            ),
-                'is_live'        => true,
-            ) );
-        }
-        
-        return $fs_fs;
-    }
-    
-    // Init Freemius.
-    fs_fs();
-    // Signal that SDK was initiated.
-    do_action( 'fs_fs_loaded' );
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
 
-if ( !isset( $redux_demo ) && file_exists( dirname( __FILE__ ) . '/framework/settings/fuse-config.php' ) ) {
-    require_once dirname( __FILE__ ) . '/framework/settings/fuse-config.php';
+define( 'FUSE_SOCIAL_ICONS_VERSION', '6.0.0' );
+define( 'FUSE_SOCIAL_ICONS_DIR', plugin_dir_path( __FILE__ ) );
+define( 'FUSE_SOCIAL_ICONS_URL', plugin_dir_url( __FILE__ ) );
+
+// Real Freemius product for this (free) build — the same product the legacy
+// free plugin has always used, so existing licenses/opt-ins carry over.
+if ( ! defined( 'FUSE_SOCIAL_FS_ID' ) ) {
+	define( 'FUSE_SOCIAL_FS_ID', 2701 );
 }
-// Creating Icons
-require_once 'inc/fuse_social_sidebar_func.php';
-// Getting Style for awesome icons
-require_once 'inc/fuse_social_sidebar_scripts.php';
-// Add settings link on plugin page
-function fuse_social_dashboard_icons()
-{
-    wp_register_style( 'fuse-social-dash', plugin_dir_url( __FILE__ ) . 'inc/css/dashicon.css' );
-    wp_enqueue_style( 'fuse-social-dash' );
+if ( ! defined( 'FUSE_SOCIAL_FS_PUBLIC_KEY' ) ) {
+	define( 'FUSE_SOCIAL_FS_PUBLIC_KEY', 'pk_70ed0c631ac1720148be7f62dca7e' );
 }
 
-// This example assumes the opt_name is set to redux_demo.  Please replace it with your opt_name value.
-add_action( 'admin_enqueue_scripts', 'fuse_social_dashboard_icons' );
-// Admin Script
-function fuse_social_admin_styles()
-{
-    if ( !empty($_GET['page']) ) {
-        if ( $_GET['page'] == "FUSESoicalFloatingSidebar" ) {
-            wp_enqueue_style( 'fuse-styles', plugin_dir_url( __FILE__ ) . 'inc/css/admin.css', array(), rand() );
-            wp_enqueue_script( 'fuse-admin-script', plugin_dir_url( __FILE__ ) . 'inc/js/admin-fuse.js', array(), rand() );
-        }
-    }
+require_once FUSE_SOCIAL_ICONS_DIR . 'includes/class-fuse-networks.php';
+require_once FUSE_SOCIAL_ICONS_DIR . 'includes/class-fuse-ui.php';
+require_once FUSE_SOCIAL_ICONS_DIR . 'includes/class-fuse-pro.php';
+require_once FUSE_SOCIAL_ICONS_DIR . 'includes/class-fuse-settings.php';
+require_once FUSE_SOCIAL_ICONS_DIR . 'includes/class-fuse-migrator.php';
+require_once FUSE_SOCIAL_ICONS_DIR . 'includes/class-fuse-share-links.php';
+require_once FUSE_SOCIAL_ICONS_DIR . 'includes/class-fuse-renderer.php';
+require_once FUSE_SOCIAL_ICONS_DIR . 'includes/class-fuse-frontend.php';
+require_once FUSE_SOCIAL_ICONS_DIR . 'includes/class-fuse-widget.php';
+require_once FUSE_SOCIAL_ICONS_DIR . 'includes/class-fuse-shortcode.php';
+require_once FUSE_SOCIAL_ICONS_DIR . 'includes/class-fuse-block.php';
+require_once FUSE_SOCIAL_ICONS_DIR . 'includes/class-fuse-admin-page.php';
+require_once FUSE_SOCIAL_ICONS_DIR . 'includes/class-fuse-migration-wizard.php';
+
+add_action( 'plugins_loaded', 'fuse_social_icons_init' );
+function fuse_social_icons_init() {
+	load_plugin_textdomain( 'fuse-social-floating-sidebar', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+
+	// Initialize the Pro/Freemius layer (no-ops safely until a product is configured).
+	Fuse_Pro::fs();
+
+	// The Viber share deep link uses its own URL scheme.
+	add_filter( 'kses_allowed_protocols', function ( $protocols ) {
+		$protocols[] = 'viber';
+		return $protocols;
+	} );
+
+	Fuse_Frontend::init();
+	Fuse_Shortcode::init();
+	Fuse_Block::init();
+	Fuse_Admin_Page::init();
+	Fuse_Migration_Wizard::init();
+
+	add_action( 'widgets_init', array( 'Fuse_Social_Icons_Widget', 'register' ) );
 }
 
-add_action( 'admin_enqueue_scripts', 'fuse_social_admin_styles' );
-
-function fuse_social_settings_link( $links )
-{
-    $settings_link = '<a href="options-general.php?page=FUSESoicalFloatingSidebar">Settings</a>';
-    array_unshift( $links, $settings_link );
-    return $links;
-}
-
-$plugin = plugin_basename( __FILE__ );
-add_filter( "plugin_action_links_{$plugin}", 'fuse_social_settings_link' );
-add_action( 'wp_footer', 'fuse_social_sidebar', 100 );
-function fuse_social_sidebar()
-{
-    $makeawesome_icons = new Making_Fuse_Icons();
-    // Getting Icons for Shortcode
-    $makeawesome_icons->Create_Awesome_Icons();
-}

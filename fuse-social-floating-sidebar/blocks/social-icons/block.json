@@ -1,0 +1,16 @@
+{
+	"apiVersion": 2,
+	"name": "fuse/social-icons",
+	"title": "Fuse Social Icons",
+	"category": "widgets",
+	"icon": "share",
+	"description": "Display your social profile links or share buttons for the current page.",
+	"textdomain": "fuse-social-icons",
+	"attributes": {
+		"mode": { "type": "string", "default": "profile" },
+		"shapeOverride": { "type": "string", "default": "" },
+		"sizeOverride": { "type": "string", "default": "" }
+	},
+	"editorScript": "fuse-social-icons-block",
+	"render": "file:./render.php"
+}
