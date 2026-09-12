@@ -42,9 +42,10 @@
 	align-items: center;
 	justify-content: center;
 	background: var(--fsi-force-bg, var(--fsi-bg, #666));
-	color: var(--fsi-force-fg, var(--fsi-fg, #fff));
-	/* !important: themes commonly style content-area links with underlines at
-	   higher specificity (e.g. ".entry-content a") than a single plugin class. */
+	/* !important: themes commonly ship a broad "reset" rule like
+	   ".theme-class a { color: #000 }" that's more specific than a lone
+	   plugin class, silently turning brand-colored icons black. */
+	color: var(--fsi-force-fg, var(--fsi-fg, #fff)) !important;
 	text-decoration: none !important;
 	line-height: 1;
 	flex-shrink: 0;
@@ -67,7 +68,7 @@
 .fsi-shape-outline .fsi-icon {
 	background: transparent;
 	border: 2px solid var(--fsi-force-bg, var(--fsi-bg, currentColor));
-	color: var(--fsi-force-bg, var(--fsi-bg, currentColor));
+	color: var(--fsi-force-bg, var(--fsi-bg, currentColor)) !important;
 	border-radius: 50%;
 }
 
@@ -75,7 +76,7 @@
 
 .fsi-icon:hover, .fsi-icon:focus-visible {
 	background: var(--fsi-force-bg, var(--fsi-hbg, var(--fsi-bg, #666)));
-	color: var(--fsi-force-fg, var(--fsi-hfg, var(--fsi-fg, #fff)));
+	color: var(--fsi-force-fg, var(--fsi-hfg, var(--fsi-fg, #fff))) !important;
 }
 .fsi-icon:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
 

@@ -3,7 +3,7 @@
  * Plugin Name: Fuse Social Icons
  * Plugin URI: https://www.fusefloat.com/
  * Description: Floating social sidebar, social share buttons, widget, and Gutenberg block — all in one plugin. Rebuilt from the ground up, with a one-click migrator from your existing settings.
- * Version: 6.0.0
+ * Version: 6.0.1
  * Author: Daniyal Ahmed
  * Author URI: https://www.fusefloat.com/
  * License: GPLv2 or later
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'FUSE_SOCIAL_ICONS_VERSION', '6.0.0' );
+define( 'FUSE_SOCIAL_ICONS_VERSION', '6.0.1' );
 define( 'FUSE_SOCIAL_ICONS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'FUSE_SOCIAL_ICONS_URL', plugin_dir_url( __FILE__ ) );
 

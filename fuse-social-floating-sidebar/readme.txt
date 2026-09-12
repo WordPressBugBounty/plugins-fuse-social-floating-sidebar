@@ -4,7 +4,7 @@ Tags: social share, social icons, floating sidebar, share buttons, social media
 Requires at least: 6.0
 Requires PHP: 7.4
 Tested up to: 7.0
-Stable tag: 6.0.0
+Stable tag: 6.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,6 +15,10 @@ Floating social icons, share buttons, a widget & a Gutenberg block, in one fast 
 **Fuse Social Icons** (formerly Fuse Social Floating Sidebar) is the easiest way to connect your visitors to your social profiles and let them share your content — a floating icon bar, share buttons, a widget, and a Gutenberg block, all from one clean settings screen.
 
 Version 6.0 is a complete, from-the-ground-up rebuild: a modern drag-and-drop admin, real social share buttons (new!), a Gutenberg block, and a one-click migrator that carries over every setting from your current install automatically — nothing to reconfigure, nothing lost.
+
+https://www.youtube.com/watch?v=fBC0SL5Ieig
+
+**[▶ Try the live demo](https://www.fusefloat.com/demo/)** — click around the real settings screen yourself before you install anything.
 
 = Free features =
 
@@ -38,7 +42,7 @@ Free covers everything most sites need. When you're ready for more:
 * **Display rules** to show or hide icons on exactly the pages/posts you choose.
 * **Real click & share analytics**, right inside your dashboard.
 
-[See Fuse Social Icons Pro →](https://www.fusefloat.com/pricing/)
+**[Unlock Fuse Social Icons Pro →](https://www.fusefloat.com/pricing/)** — one-time payment starting at $29.99. No subscriptions, lifetime updates.
 
 = Why site owners choose Fuse Social Icons =
 
@@ -95,10 +99,16 @@ Post in the plugin's support forum on WordPress.org, or reach us directly at [fu
 
 == Upgrade Notice ==
 
+= 6.0.1 =
+Fixes icons showing black instead of their brand color on some themes. Recommended for everyone on 6.0.0.
+
 = 6.0.0 =
 Complete rebuild with social share buttons, a Gutenberg block, and a redesigned admin. Your existing settings are imported automatically — review and confirm on first activation.
 
 == Changelog ==
+
+= 6.0.1 =
+* Fixed: icons could render black instead of their brand/custom color when a theme applied a broad `color` rule to links (some themes set this more specifically than the plugin's own style, overriding it). Icon color now always applies correctly regardless of theme CSS.
 
 = 6.0.0 =
 Complete rebuild of the plugin:
